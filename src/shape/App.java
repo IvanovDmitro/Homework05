@@ -10,7 +10,7 @@ public class App {
     public static void main(String[] args) {
         shape = new Shape[5];
         shape[0] = new Circle(10);
-        shape[1] = new Triangle(5, 15);
+        shape[1] = new Triangle(5, 4, 3);
         shape[2] = new Square(13.1);
         shape[3] = new Square(18.1);
         shape[4] = new Circle(13.45);

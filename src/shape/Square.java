@@ -1,12 +1,14 @@
 package shape;
 
-public class Square extends Shape implements SquareShapes {
-    public Square(double aside) {
-        super(aside);
+public class Square implements Shape {
+    private final double aSide;
+
+    public Square(double aSide) {
+        this.aSide = aSide;
     }
 
     @Override
     public double getSquare() {
-        return getAside() * getAside();
+        return aSide * aSide;
     }
 }

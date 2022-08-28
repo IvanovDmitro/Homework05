@@ -5,7 +5,6 @@ public class Participant implements Capabilities {
     private final String name;
     private final int maxRun;
     private final int maxJump;
-    protected boolean isPass;
 
     public Participant(String name, int maxRun, int maxJump) {
         this.name = name;
@@ -13,41 +12,38 @@ public class Participant implements Capabilities {
         this.maxJump = maxJump;
     }
 
-    void checkObstacle(Obstacles obstacles) {
+    boolean checkObstacle(Obstacles obstacles) {
         if (obstacles instanceof RunningTrack) {
-            this.run(obstacles);
+            return this.run(obstacles);
         } else if (obstacles instanceof Wall) {
-            this.jump(obstacles);
+            return this.jump(obstacles);
         }
+        return true;
     }
 
     @Override
-    public void run(Obstacles runningTrack) {
+    public boolean run(Obstacles runningTrack) {
         if (runningTrack.overcome(maxRun)) {
-            isPass = true;
-            System.out.println("Participant " + name + " passed obstacle running track at distance "
-                    + runningTrack.getNameObstacle());
+            System.out.printf("Participant %s pass obstacle running track at distance %s\n"
+                    , name, runningTrack.getNameObstacle());
+            return true;
         } else {
-            isPass = false;
-            System.out.println("Participant " + name + " didn't pass obstacle running track at distance "
-                    + runningTrack.getNameObstacle() + " passed only " + maxRun);
+            System.out.printf("Participant %s didn't pass obstacle running track at distance %s passed only %d\n"
+                    , name, runningTrack.getNameObstacle(), maxRun);
+            return false;
         }
     }
 
     @Override
-    public void jump(Obstacles wall) {
+    public boolean jump(Obstacles wall) {
         if (wall.overcome(maxJump)) {
-            isPass = true;
-            System.out.println("Participant " + name + " passed obstacle wall at distance "
-                    + wall.getNameObstacle());
+            System.out.printf("Participant %s pass obstacle wall at distance %s\n"
+                    , name, wall.getNameObstacle());
+            return true;
         } else {
-            isPass = false;
-            System.out.println("Participant " + name + " didn't pass obstacle wall at distance "
-                    + wall.getNameObstacle() + " passed only " + maxJump);
+            System.out.printf("Participant %s didn't pass obstacle wall at distance %s passed only %d\n"
+                    , name, wall.getNameObstacle(), maxJump);
+            return false;
         }
-    }
-
-    public boolean isPass() {
-        return isPass;
     }
 }

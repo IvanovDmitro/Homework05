@@ -1,7 +1,7 @@
 package shape;
 
-public class Circle extends Shape implements SquareShapes {
-    double r;
+public class Circle implements Shape {
+    private final double r;
 
     public Circle(double r) {
         this.r = r;

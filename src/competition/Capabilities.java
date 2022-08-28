@@ -1,7 +1,7 @@
 package competition;
 
 public interface Capabilities {
-    void run(Obstacles runningTrack);
+    boolean run(Obstacles runningTrack);
 
-    void jump(Obstacles wall);
+    boolean jump(Obstacles wall);
 }
